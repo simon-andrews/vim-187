@@ -56,3 +56,10 @@ function! DSZip(output)
   execute '!cd ' . s:DSFindRoot() . '/.. && zip -r ' . fnamemodify(a:output, ':p') . ' ' . s:DSGetProjectName()
 endfunction
 command! -nargs=1 DSZip call DSZip(<q-args>)
+
+" Opens Gradescope in a web browser for easy uploading
+function! DSOpenGS()
+  let gs_url = get(g:, 'ds_gradescopeurl', 'https://www.gradescope.com/')
+  call system('python -m webbrowser -t ' . gs_url)
+endfunction
+command! DSOpenGS call DSOpenGS()

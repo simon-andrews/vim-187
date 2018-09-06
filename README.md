@@ -12,8 +12,11 @@ let g:ds_junitlocation="/path/to/your/junit-4.x.jar"
 ```
 in your Vim configuration file. By default, this value will be set to /usr/share/java/junit.jar.
 
+You may also set `g:gs_gradescopeurl` to the URL for your specific course's page (https://www.gradescope.com/courses/XXXXX) so that `:DSOpenGS` will take you directly there instead of to your Gradescope homepage (the default behavior). `:DSOpenGS` requires that Python be installed and available on your path as "python".
+
 Usage
 -----
  * `:DSBuild` to compile your project
  * `:DSTest` to compile your project and show JUnit test results
- * `:DSZip [filename]` to create a ZIP archive of your project for uploading to Gradescope.
+ * `:DSOpenGS` to open Gradescope in your web browser
+ * `:DSZip [filename]` to create a ZIP archive of your project for uploading to Gradescope
