@@ -4,10 +4,10 @@ vim-187 is a Vim plugin for working with projects for [COMPSCI 187: Programming 
 
 Installation
 ------------
-vim-187 may be installed with Vim plugin managers, such as [vim-plug](https://github.com/junegunn/vim-plug). You can also just paste 187.vim from the plugins directory into your own plugins directory, but then you won't get updates.
+vim-187 may be installed with Vim plugin managers, such as [vim-plug](https://github.com/junegunn/vim-plug). You can also just paste 187.vim from the plugins directory into your own plugins directory, but then you won't get automatic updates through Git.
 
-After you install, you must tel vim-187 where your copy of [JUnit 4](https://junit.org/junit4/) is (JUnit 3 will not work). You can do this by putting
-```vimscript
+After you install, you must tell vim-187 where your copy of [JUnit 4](https://junit.org/junit4/) is (JUnit 3 will not work). You can do this by putting
+```vim
 let g:ds_junitlocation="/path/to/your/junit-4.x.jar"
 ```
 in your Vim configuration file. By default, this value will be set to /usr/share/java/junit.jar.
