@@ -3,7 +3,7 @@ let g:ds_junitlocation = get(g:, 'ds_junitlocation', '/usr/share/java/junit.jar'
 " Helper function for finding the root of an Eclipse project. Starts at the
 " directory VIM was started from, and recursively moves up the filesystem tree
 " searching for an Eclipse .project file.
-function! s:DSFindRootHelper(cd)
+function s:DSFindRootHelper(cd)
   if !empty(glob(a:cd . '/.project'))
     return a:cd
   elseif a:cd == '/' " no letters with cases to care about here so whatever :P
@@ -12,25 +12,25 @@ function! s:DSFindRootHelper(cd)
     return s:DSFindRootHelper(fnamemodify(a:cd, ':h'))
   endif
 endfunction
-function! s:DSFindRoot()
+function s:DSFindRoot()
   return s:DSFindRootHelper(expand('%:p:h'))
 endfunction
 
-function! s:DSGetProjectName()
+function s:DSGetProjectName()
   return fnamemodify(s:DSFindRoot(), ':t')
 endfunction
 
-function! s:DSFindCode(subdir)
+function s:DSFindCodeFiles(subdir)
   return globpath(s:DSFindRoot() . '/' . a:subdir, '**/*.java')
 endfunction
 
-function DSBuild()
+function s:DSBuild()
   echo 'Compiling...'
-  call system('javac -d ' . s:DSFindRoot() . '/bin -cp ' . g:ds_junitlocation . ' ' . s:DSFindCode('src') . ' ' . s:DSFindCode('test'))
+  call system('javac -d ' . s:DSFindRoot() . '/bin -cp ' . g:ds_junitlocation . ' ' . s:DSFindCodeFiles('src') . ' ' . s:DSFindCodeFiles('test'))
   echon "\r\r"
   echon 'Done!'
 endfunction
-command! DSBuild call DSBuild()
+command! DSBuild call s:DSBuild()
 
 function s:DSBuildTestClassList(binDir)
   let classes = []
@@ -44,22 +44,22 @@ function s:DSBuildTestClassList(binDir)
   return classes
 endfunction
 
-function! DSTest()
-  call DSBuild()
+function s:DSTest()
+  call s:DSBuild()
   execute '!java -cp ' . g:ds_junitlocation . ':' . s:DSFindRoot() . '/bin org.junit.runner.JUnitCore ' . s:DSBuildTestClassList(s:DSFindRoot() . '/bin')
 endfunction
-command! DSTest call DSTest()
+command! DSTest call s:DSTest()
 
 " Creates a ZIP archive for the current project, ready for uploading to
 " GradeScope.
-function! DSZip(output)
+function s:DSZip(output)
   execute '!cd ' . s:DSFindRoot() . '/.. && zip -r ' . fnamemodify(a:output, ':p') . ' ' . s:DSGetProjectName()
 endfunction
-command! -nargs=1 DSZip call DSZip(<q-args>)
+command! -nargs=1 DSZip call s:DSZip(<q-args>)
 
 " Opens Gradescope in a web browser for easy uploading
-function! DSOpenGS()
+function s:DSOpenGS()
   let gs_url = get(g:, 'ds_gradescopeurl', 'https://www.gradescope.com/')
   call system('python -m webbrowser -t ' . gs_url)
 endfunction
-command! DSOpenGS call DSOpenGS()
+command! DSOpenGS call s:DSOpenGS()
