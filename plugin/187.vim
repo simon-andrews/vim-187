@@ -50,7 +50,9 @@ endfunction
 
 function s:DSTest()
   call s:DSBuild()
-  execute '!java -cp ' . g:ds_junitlocation . ':' . s:DSFindRoot() . '/bin org.junit.runner.JUnitCore ' . s:DSBuildTestClassList(s:DSFindRoot() . '/bin')
+  if v:shell_error == 0
+    execute '!java -cp ' . g:ds_junitlocation . ':' . s:DSFindRoot() . '/bin org.junit.runner.JUnitCore ' . s:DSBuildTestClassList(s:DSFindRoot() . '/bin')
+  end
 endfunction
 command! DSTest call s:DSTest()
 
