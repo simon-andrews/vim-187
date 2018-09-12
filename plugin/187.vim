@@ -26,9 +26,13 @@ endfunction
 
 function s:DSBuild()
   echo 'Compiling...'
-  call system('javac -d ' . s:DSFindRoot() . '/bin -cp ' . g:ds_junitlocation . ' ' . s:DSFindCodeFiles('src') . ' ' . s:DSFindCodeFiles('test'))
-  echon "\r\r"
-  echon 'Done!'
+  let javac_out = system('javac -d ' . s:DSFindRoot() . '/bin -cp ' . g:ds_junitlocation . ' ' . s:DSFindCodeFiles('src') . ' ' . s:DSFindCodeFiles('test'))
+  if v:shell_error != 0
+    echoerr javac_out
+  else
+    echon '\r\r'
+    echon 'Done!'
+  end
 endfunction
 command! DSBuild call s:DSBuild()
 
