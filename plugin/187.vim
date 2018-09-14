@@ -72,4 +72,6 @@ command! DSOpenGS call s:DSOpenGS()
 
 " Currently does this for all Java files. Not good! Should only work for 187
 " files.
-autocmd Filetype java set noexpandtab 
+if get(g:, "ds_tabsforjava", 1)
+  autocmd Filetype java set noexpandtab 
+endif
