@@ -69,3 +69,7 @@ function s:DSOpenGS()
   call system('python -m webbrowser -t ' . gs_url)
 endfunction
 command! DSOpenGS call s:DSOpenGS()
+
+" Currently does this for all Java files. Not good! Should only work for 187
+" files.
+autocmd Filetype java set noexpandtab 
