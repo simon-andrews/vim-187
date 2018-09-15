@@ -21,16 +21,17 @@ function s:DSGetProjectName()
 endfunction
 
 function s:DSFindCodeFiles(subdir)
-  return globpath(s:DSFindRoot() . '/' . a:subdir, '**/*.java')
+  return substitute(globpath(s:DSFindRoot() . '/' . a:subdir, '**/*.java'), '\n', ' ', '')
 endfunction
 
 function s:DSBuild()
   echo 'Compiling...'
-  let javac_out = system('javac -d ' . s:DSFindRoot() . '/bin -cp ' . g:ds_junitlocation . ' ' . s:DSFindCodeFiles('src') . ' ' . s:DSFindCodeFiles('test'))
+  let cmd = 'javac -d ' . s:DSFindRoot() . '/bin -cp ' . g:ds_junitlocation . ' ' . s:DSFindCodeFiles('src') . ' ' . s:DSFindCodeFiles('test')
+  let javac_out = system(cmd)
   if v:shell_error != 0
     echoerr javac_out
   else
-    echon '\r\r'
+    echon "\r\r"
     echon 'Done!'
   end
 endfunction
