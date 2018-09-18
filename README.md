@@ -2,7 +2,7 @@ vim-187
 =======
 vim-187 is a Vim plugin for working with projects for [COMPSCI 187: Programming with Data Structures](https://umass-cs-187.github.io/) at [UMass Amherst](https://www.umass.edu/).
 
-**Warning:** vim-187 currently sets *all Java files* to use spaces instead of tabs, because this is how the starter code for COMPSCI 187 projects is. If this isn't what you want, put `let g:ds_tabsforjava=0` in your Vim configuration file. A more clever solution for the tab/space thing will hopefully come out soon.
+**Warning:** vim-187 currently sets *all Java files* to use tabs instead of spaces, because this is how the starter code for COMPSCI 187 projects is. If this isn't what you want, put `let g:ds_tabsforjava=0` in your Vim configuration file. A more clever solution for the tab/space thing will hopefully come out soon.
 
 Installation
 ------------
